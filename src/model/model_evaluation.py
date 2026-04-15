@@ -5,8 +5,8 @@ import logging
 import json
 from typing import Dict
 from sklearn.metrics import accuracy_score, precision_score, recall_score, roc_auc_score
-import mlflow
-import dagshub
+#import mlflow
+#import dagshub
 import os
 import joblib
 
@@ -71,17 +71,7 @@ def save_metrics(metrics: Dict[str, float], file_path: str) -> None:
         logging.error(f"Failed to save metrics: {e}")
         raise
 
-def save_model_info(run_id:str,model_path:str,file_path:str) -> None:
-    # save the run id and model json path
-    try:
-        model_info = {'run_id':run_id,'model_path':model_path}
 
-        with open(file_path,'w') as path:
-            json.dump(model_info,path,indent=4)
-        logging.debug('model info saved %s',file_path)
-
-    except Exception as e:
-        logging.error('error occoured while saving the model',e)
 
 
 # ---------------- Main Pipeline ----------------
@@ -103,3 +93,8 @@ def main():
             logging.info("Model evaluation completed successfully.")
         except Exception as e:
             logging.exception("Model evaluation pipeline failed.")
+
+
+
+if __name__ == '__main__':
+    main()
